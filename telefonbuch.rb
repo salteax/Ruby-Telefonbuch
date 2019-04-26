@@ -4,8 +4,14 @@ execute = true
 selection = ""
 file_name = ""
 
+check_auswahl = false
+
+nachname = ""
+vorname = ""
+telefonnummer = ""
+
 def t_auswaehlen
-  puts "[Alle vorhandenen Telefonbücher.]".blue
+  puts "[Alle vorhandenen Telefonbücher]".blue
   puts Dir.glob("*.txt").map {|f| File.basename(f, ".*")}
 
   print "Telefonbuchname: "
@@ -14,6 +20,7 @@ def t_auswaehlen
 
   if (File.file?(file_name) == true)
     "[!]".red + " #{file_name} wurde ausgewählt!"
+    check_auswahl = true
   else
     file_name = ""
     "[?]".red + " #{file_name} existiert nicht!"
@@ -21,7 +28,7 @@ def t_auswaehlen
 end
 
 def t_anlegen
-  puts "[Anlegen eines neuen Telefonbuches.]".blue
+  puts "[Anlegen eines neuen Telefonbuches]".blue
   print "Telefonbuchname: "
   file_name = gets.chomp
   file_name = file_name + ".txt"
@@ -35,7 +42,7 @@ def t_anlegen
 end
 
 def t_loeschen
-  puts "[Löschen eines Telefonbuches.]".blue
+  puts "[Löschen eines Telefonbuches]".blue
   print "Telefonbuchname: "
   file_name = gets.chomp
   file_name = file_name + ".txt"
@@ -48,6 +55,17 @@ def t_loeschen
 end
 
 def k_anlegen
+  puts "[Anlegen eines neuen Kontaktes]".blue
+
+  print "Nachname: "
+  nachname = gets.chomp
+  print "Vorname: "
+  vorname = gets.chomp
+  print "Telefonnummer: "
+  telefonnummer = gets.chomp
+
+  telefonnummer = gets.chomp
+  File.open(file_name, 'r+') { |file| file.write(namename + ';' + vorname + ';') }
 end
 
 def k_auswaehlen
